@@ -1,0 +1,9 @@
+[submodule "account-service"]
+	path = account-service
+	url = git@github.com:bug-report-app/account-service.git
+	branch = main
+
+[submodule "notification-service"]
+	path = notification-service
+	url = git@github.com:bug-report-app/notification-service.git
+	branch = main
