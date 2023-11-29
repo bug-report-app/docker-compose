@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-alpine
+    volumes:
+      - /var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - bugreport-network
+
+  account-service:
+    build: ./account-service
+    container_name: account-service
+    restart: always
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      PORT_HTTP: 3001
+    ports:
+      - 3001:3001
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/home/bugreport-service
+    networks:
+      - bugreport-network
+
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    restart: always
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      PORT_HTTP: 3002
+    ports:
+      - 3002:3002
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/home/bugreport-service
+    networks:
+      - bugreport-network
+
+networks:
+  bugreport-network:
