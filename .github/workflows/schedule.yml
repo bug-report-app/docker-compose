@@ -1,0 +1,15 @@
+# Example of running a schedule every 10 minutes
+name: schedule
+
+on:
+schedule:
+  - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  schudule_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run schedule
+        run: |
+          echo "Testing schedule execution"
