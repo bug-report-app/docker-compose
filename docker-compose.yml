@@ -16,8 +16,11 @@ services:
     container_name: account-service
     restart: always
     environment:
-      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
       PORT_HTTP: 3001
+      MONGODB_USERNAME: ${MONGODB_USERNAME}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
     ports:
       - 3001:3001
     depends_on:
@@ -32,7 +35,7 @@ services:
     container_name: notification-service
     restart: always
     environment:
-      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
       PORT_HTTP: 3002
     ports:
       - 3002:3002
