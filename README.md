@@ -74,3 +74,15 @@ Delete all container images:
 ```sh
 docker rmi -f $(sudo docker images -q)
 ```
+
+Update modules:
+
+```sh
+git submodule update --init --recursive
+```
+
+and
+
+```sh
+git submodule update --recursive --remote
+```
